@@ -63,6 +63,7 @@
                     <i class="fab fa-whatsapp"></i>
                 </a>
                 </div>
+                   <!-- <a class="button button-md button-default-outline-2 button-ujarak" href="#">Get a Free Quote</a>  -->
                 </div>
                 <style>
                   .whatsapp-button {
@@ -101,9 +102,9 @@
                     </li>
                     <li class="rd-nav-item "><a class="rd-nav-link" href="about.html">About</a>
                     </li>
-                    <li class="rd-nav-item "><a class="rd-nav-link" href="typography.html">Gallery</a>
+                    <li class="rd-nav-item active"><a class="rd-nav-link" href="typography.html">Gallery</a>
                     </li>
-                    <li class="rd-nav-item active"><a class="rd-nav-link" href="contact-us.html">Contact Us</a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="contact-us.html">Contact Us</a>
                     </li>
                   </ul>
                 </div>
@@ -193,10 +194,13 @@ iframe {
       </section>
 
       <!-- Contact Form-->
-      <div class="row">
+       
+      <div class="row" style="justify-content: center; align-items: center; margin: 140px;">
+        <h1 style="padding: 10px; font-weight: 800;margin-top: -120px;color: #1F2937;">Get In Touch</h1>
         <div class="col-lg-12">
           <form id="contactform" method="post">
             <div class="row">
+              
               <div class="col-md-12">
                 <div class="form-group">
                   <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required data-error="Please enter your name">
@@ -221,55 +225,71 @@ iframe {
                   <div class="help-block with-errors"></div>
                 </div>
                 <div class="submit-button text-center">
-                  <button class="btn btn-common" id="s-btn" type="submit">Send Message</button>
-                  <button class="btn btn-common" id="loading" style="display: none;" type="submit">Sending...</button>
+                  <button
+                    class="btn btn-common"
+                    id="s-btn"
+                    type="submit"
+                    style="background-color: #1F2937; color: white; border-radius: 50px; height: 50px; width: 200px; display: flex; justify-content: center; align-items: center; margin: 0 auto;">
+                    Send Message
+                  </button>
+                  <button
+                    class="btn btn-common"
+                    id="loading"
+                    type="submit"
+                    style="background-color: #1F2937; color: white; border-radius: 50px; height: 50px; width: 200px; display: flex; justify-content: center; align-items: center; margin: 0 auto; display: none;">
+                    Sending...
+                  </button>
                   <div id="successMessage" style="display: none;" class="alert alert-success text-center">
                     Thank you! Your message has been successfully sent. We will get back to you soon.
                   </div>
                   <div class="clearfix"></div>
                 </div>
+                
               </div>
             </div>
           </form>
         </div>
       </div>
-      
-      <script>
-        $(document).ready(function () {
-          $('#contactform').submit(function (e) {
-            e.preventDefault(); // Prevent the default form submission
-      
-            // Show loading indicator and hide the send button
-            const loading = document.getElementById('loading');
-            const btn = document.getElementById('s-btn');
-            const successMessage = document.getElementById('successMessage');
-            
-            loading.style.display = 'block';
-            btn.style.display = 'none';
-      
-            // Send form data via AJAX
-            $.ajax({
-              url: 'https://script.google.com/macros/s/AKfycbywcRskuYASG-nY_3xA1SxhTviSFKKvdI918oLLwKheqcZgGJPudCe9lAnQORwPShHSNg/exec', // Update with your script URL
-              method: 'POST',
-              data: $('#contactform').serialize(), // Serialize the form data
-              success: function (response) {
-                // Show success message and reset the form
-                successMessage.style.display = 'block';
-                $('#contactform')[0].reset(); // Reset the form fields
-                
-                loading.style.display = 'none';
-                btn.style.display = 'block';
-              },
-              error: function (err) {
-                // Handle error
-                loading.style.display = 'none';
-                btn.style.display = 'block';
-                alert('Something went wrong. Please try again.');
-              }
-            });
-          });
-        });
-      </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#contactform').submit(function (e) {
+      e.preventDefault(); // Prevent default form submission
+
+      // Show the loading indicator and hide the send button
+      const loading = document.getElementById('loading');
+      const btn = document.getElementById('s-btn');
+      const successMessage = document.getElementById('successMessage');
+
+      loading.style.display = 'block';
+      btn.style.display = 'none';
+
+      // Send form data to Google Apps Script URL
+      $.ajax({
+        url: 'https://script.google.com/macros/s/AKfycbywcRskuYASG-nY_3xA1SxhTviSFKKvdI918oLLwKheqcZgGJPudCe9lAnQORwPShHSNg/exec', // Replace with your script URL
+        method: 'POST',
+        data: $('#contactform').serialize(), // Serialize form data
+        success: function (response) {
+          console.log(response); // Log the response to see its structure
+          
+          // Show success message and reset form
+          successMessage.style.display = 'block';
+          $('#contactform')[0].reset();
+
+          // Reset button states
+          loading.style.display = 'none';
+          btn.style.display = 'block';
+        },
+        error: function () {
+          alert('Error submitting the form. Please try again.');
+          loading.style.display = 'none';
+          btn.style.display = 'block';
+        },
+      });
+    });
+  });
+</script>
+
       
       <footer class="section footer-corporate context-dark">
         <div class="footer-corporate-inset">
